@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>gz_gaussian_splatting</name><version>0.1.0</version>
+  <description>Ogre2 anisotropic Gaussian splat visualization for Gazebo Harmonic.</description>
+  <maintainer email="solvorlabs@gmail.com">Solvor Labs</maintainer>
+  <maintainer email="haarishuda090@gmail.com">Solvor Labs secondary contact</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>gz_gui_vendor</depend><depend>gz_rendering_vendor</depend>
+  <depend>gz_common_vendor</depend><depend>gz_plugin_vendor</depend>
+  <depend>gz_msgs_vendor</depend><depend>gz_transport_vendor</depend>
+  <depend>gz_ogre_next_vendor</depend>
+  <build_depend>qtbase5-dev</build_depend>
+  <build_depend>qtdeclarative5-dev</build_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

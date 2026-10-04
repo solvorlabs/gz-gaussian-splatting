@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gz-gaussian-splatting"
+version = "0.1.0"
+description = "PLY conversion and scene tools for the Solvor Labs Gazebo Gaussian renderer"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Solvor Labs"}]
+maintainers = [
+  {name = "Solvor Labs", email = "solvorlabs@gmail.com"},
+  {name = "Solvor Labs secondary contact", email = "haarishuda090@gmail.com"},
+]
+dependencies = []
+
+[project.scripts]
+gzgs = "gz_gaussian_splatting.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["python"]

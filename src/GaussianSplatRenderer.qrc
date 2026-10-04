@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="/GaussianSplatRenderer">
+    <file>GaussianSplatRenderer.qml</file>
+  </qresource>
+</RCC>

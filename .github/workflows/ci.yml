@@ -1,0 +1,40 @@
+name: Build and test
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  core:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install build
+      - run: python -m build
+      - run: python -m pip install dist/*.whl
+      - run: gzgs demo --output-dir wheel-demo
+      - run: cmake -S . -B build -DBUILD_RENDERER=OFF -DPython3_EXECUTABLE=$(which python)
+      - run: cmake --build build && ctest --test-dir build --output-on-failure
+  harmonic:
+    runs-on: ubuntu-24.04
+    container: ros:jazzy-ros-base
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build and software-rendering dependencies
+        run: |
+          apt-get update
+          apt-get install -y build-essential cmake python3-venv qtbase5-dev qtdeclarative5-dev xvfb xauth libgl1-mesa-dri \
+            ros-jazzy-ros-gz ros-jazzy-gz-common-vendor ros-jazzy-gz-gui-vendor \
+            ros-jazzy-gz-plugin-vendor ros-jazzy-gz-rendering-vendor \
+            ros-jazzy-gz-msgs-vendor ros-jazzy-gz-transport-vendor ros-jazzy-gz-ogre-next-vendor
+      - name: Build and validate GUI with Mesa
+        shell: bash
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          cmake -S . -B build -DCMAKE_INSTALL_PREFIX="$PWD/install" -DCMAKE_INSTALL_LIBDIR=lib
+          cmake --build build -j2
+          ctest --test-dir build --output-on-failure
+          cmake --install build
+          LIBGL_ALWAYS_SOFTWARE=1 QT_QPA_PLATFORM=xcb xvfb-run -a -s '-screen 0 1280x900x24' bash scripts/gui_smoke.sh

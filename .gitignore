@@ -1,0 +1,15 @@
+/build*/
+/install/
+/log/
+/.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+/dist/
+/demo-output/
+*.gzgs
+*.ply
+*.splat
+/.env
+/.runtime/
+/validation-output/

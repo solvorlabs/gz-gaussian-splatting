@@ -1,0 +1,10 @@
+gz-gaussian-splatting
+Copyright 2026 Solvor Labs
+
+This package contains original renderer and scene tooling extracted from the
+Solvor Labs swarm_platform research project. It implements published Gaussian
+splatting mathematics and reads the standard 3DGS/Splatfacto PLY convention.
+No training code, model weights, or captured datasets are distributed.
+
+Gazebo, Qt and Ogre-Next are external dependencies and retain their own
+licenses. See docs/THIRD_PARTY.md for dependency and provenance information.
